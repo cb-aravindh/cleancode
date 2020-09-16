@@ -17,7 +17,7 @@ public class HotelManagement {
             int days = sc.nextInt();
             System.out.println("Enter the no of guests");
             int guestCount = sc.nextInt();
-            double Tprice = getprice(days,guestCount);
+            double Tprice = getprice(days , guestCount);
             System.out.println("Total Price : "+Tprice);
         }
         else {
@@ -38,28 +38,28 @@ public class HotelManagement {
             priceForOnePerson = 1000;
             taxPercent= 25.60;
             totalAmt = (priceForOnePerson * guestCount) * days;
-            GST = (totalAmt/100) * taxPercent;
+            GST = (taxPercent/100) * totalAmt;
             return totalAmt + GST;
         }
         else if (days > oneWeek && days < twoWeek){
             priceForOnePerson = 950;
             taxPercent= 20.15;
             totalAmt =(priceForOnePerson * guestCount) * days;
-            GST = (totalAmt/100) * taxPercent;
+            GST = (taxPercent/100) * totalAmt;
             return totalAmt + GST;
         }
         else{
             priceForOnePerson = 800;
             taxPercent= 17.36;
             totalAmt = (priceForOnePerson * guestCount) * days;
-            GST = (totalAmt/100) * taxPercent;
+            GST = (taxPercent/100) * totalAmt;
             return totalAmt + GST;
         }
 
     }
 
     private static boolean checkRoomsAvl(int roomCount) {
-        int roomAvailable = Collections.frequency(rooms,N);
-        return roomAvailable < roomCount ? false : true;
+        int roomUnOccupied = Collections.frequency(rooms,N);
+        return roomUnOccupied < roomCount ? false : true;
     }
 }

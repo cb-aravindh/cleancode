@@ -2,6 +2,25 @@ package chapter_3;
 
 import java.util.*;
 
+enum  PricePerPerson {
+    LESS_THAN_ONE_WEEK(1000,25.60),MORE_THAN_ONE_WEEK(950,20.15),MORE_THAN_TWO_WEEK(800,17.36);
+
+    private  int amount;
+    private double taxPercent;
+
+    PricePerPerson( int amount ,double taxPercent){
+        this.amount = amount;
+        this.taxPercent = taxPercent;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+    public double getTaxPercent() {
+        return taxPercent;
+    }
+}
+
 public class RHotelManagement {
 
     private static final String F = "Filled";
@@ -11,10 +30,15 @@ public class RHotelManagement {
     public static final int oneWeek = 7;
     public static final int twoWeek = 14;
 
-    public static double priceForOnePerson;
-    public static double taxPercent;
-    public static double totalAmt;
-    public static double GST;
+    private  PricePerPerson priceForOnePerson;
+    private  double days;
+    private  double guestCount;
+
+    RHotelManagement(PricePerPerson priceForOnePerson,double days ,double guestCount){
+        this.priceForOnePerson = priceForOnePerson;
+        this.days = days;
+        this.guestCount = guestCount;
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -31,12 +55,11 @@ public class RHotelManagement {
         else {
             System.out.println("Rooms are full");
         }
-
     }
 
     private static boolean checkRoomsAvl(int roomCount) {
-        int roomAvailable = Collections.frequency(rooms,N);
-        return roomAvailable < roomCount ? false : true;
+        int roomUnOccupied = Collections.frequency(rooms,N);
+        return roomUnOccupied < roomCount ? false : true;
     }
 
     private static double getprice(int days, int guestCount) {
@@ -49,32 +72,26 @@ public class RHotelManagement {
         }
         else{
             return moreThenTwoWeekStay(days, guestCount);
-
         }
 
     }
     private static double lessThenOneWeekStay(int days, int guestCount){
-        priceForOnePerson = 1000;
-        taxPercent= 25.60;
-        totalAmt = (priceForOnePerson * guestCount) * days;
-        GST = (totalAmt/100) * taxPercent;
-        return totalAmt + GST;
+        return new RHotelManagement(PricePerPerson.LESS_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
     private static double moreThenOneWeekStay (int days, int guestCount){
-        priceForOnePerson = 950;
-        taxPercent= 20.15;
-        totalAmt =(priceForOnePerson * guestCount) * days;
-        GST = (totalAmt/100) * taxPercent;
-        return totalAmt + GST;
+        return new RHotelManagement(PricePerPerson.MORE_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
     private static double moreThenTwoWeekStay (int days, int guestCount){
-        priceForOnePerson = 800;
-        taxPercent= 17.36;
-        totalAmt = (priceForOnePerson * guestCount) * days;
-        GST = (totalAmt/100) * taxPercent;
+        return new RHotelManagement(PricePerPerson.MORE_THAN_TWO_WEEK, days, guestCount).execute();
+    }
+
+    private double execute(){
+        double totalAmt =(this.priceForOnePerson.getAmount() * this.guestCount) * this.days;
+        double GST = (this.priceForOnePerson.getTaxPercent()/100) * totalAmt;
         return totalAmt + GST;
     }
+
 
 }
