@@ -13,10 +13,10 @@ enum  PricePerPerson {
         this.taxPercent = taxPercent;
     }
 
-    public int getAmount() {
+    int getAmount() {
         return amount;
     }
-    public double getTaxPercent() {
+    double getTaxPercent() {
         return taxPercent;
     }
 }
@@ -33,7 +33,7 @@ public class RHotelManagement {
     private  PricePerPerson priceForOnePerson;
     private  double days;
     private  double guestCount;
-
+    RHotelManagement(){}
     RHotelManagement(PricePerPerson priceForOnePerson,double days ,double guestCount){
         this.priceForOnePerson = priceForOnePerson;
         this.days = days;
@@ -41,15 +41,21 @@ public class RHotelManagement {
     }
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
+        RHotelManagement hotel = new RHotelManagement();
+
         System.out.println("Enter the no of rooms guest needed");
         int roomCount = sc.nextInt();
-        if(checkRoomsAvl(roomCount)){
+        
+        if( hotel.checkRoomsAvl(roomCount) ){
             System.out.println("Enter the no of days going to stay");
             int days = sc.nextInt();
+
             System.out.println("Enter the no of guests");
             int guestCount = sc.nextInt();
-            double Tprice = getprice(days,guestCount);
+
+            double Tprice = hotel.getprice(days,guestCount);
             System.out.println("Total Price : "+Tprice);
         }
         else {
@@ -57,12 +63,12 @@ public class RHotelManagement {
         }
     }
 
-    private static boolean checkRoomsAvl(int roomCount) {
+    private boolean checkRoomsAvl(int roomCount) {
         int roomUnOccupied = Collections.frequency(rooms,N);
         return roomUnOccupied < roomCount ? false : true;
     }
 
-    private static double getprice(int days, int guestCount) {
+    private double getprice(int days, int guestCount) {
 
         if(days < oneWeek){
             return lessThenOneWeekStay( days, guestCount);
@@ -75,15 +81,15 @@ public class RHotelManagement {
         }
 
     }
-    private static double lessThenOneWeekStay(int days, int guestCount){
+    private double lessThenOneWeekStay(int days, int guestCount){
         return new RHotelManagement(PricePerPerson.LESS_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
-    private static double moreThenOneWeekStay (int days, int guestCount){
+    private double moreThenOneWeekStay (int days, int guestCount){
         return new RHotelManagement(PricePerPerson.MORE_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
-    private static double moreThenTwoWeekStay (int days, int guestCount){
+    private double moreThenTwoWeekStay (int days, int guestCount){
         return new RHotelManagement(PricePerPerson.MORE_THAN_TWO_WEEK, days, guestCount).execute();
     }
 
