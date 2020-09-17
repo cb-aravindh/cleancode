@@ -5,7 +5,7 @@ import java.util.*;
 enum  PricePerPerson {
     LESS_THAN_ONE_WEEK(1000,25.60),MORE_THAN_ONE_WEEK(950,20.15),MORE_THAN_TWO_WEEK(800,17.36);
 
-    private  int amount;
+    private int amount;
     private double taxPercent;
 
     PricePerPerson( int amount ,double taxPercent){
@@ -23,16 +23,16 @@ enum  PricePerPerson {
 
 public class RHotelManagement {
 
-    private static final String F = "Filled";
-    private static final String N = "NotFilled";
-    public static List<String> rooms = Arrays.asList(F,F,N,N,N,N,N,N,N,N,N);
+    private final String F = "Filled";
+    private final String N = "NotFilled";
+    private List<String> rooms = Arrays.asList(F,F,N,N,N,N,N,N,N,N,N);
 
-    public static final int oneWeek = 7;
-    public static final int twoWeek = 14;
+    public final int oneWeek = 7;
+    public final int twoWeek = 14;
 
-    private  PricePerPerson priceForOnePerson;
-    private  double days;
-    private  double guestCount;
+    private PricePerPerson priceForOnePerson;
+    private double days;
+    private double guestCount;
     RHotelManagement(){}
     RHotelManagement(PricePerPerson priceForOnePerson,double days ,double guestCount){
         this.priceForOnePerson = priceForOnePerson;
