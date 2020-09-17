@@ -27,8 +27,8 @@ public class RHotelManagement {
     private final String N = "NotFilled";
     private List<String> rooms = Arrays.asList(F, F, N, N, N, N, N, N, N, N, N);
 
-    public final int oneWeek = 7;
-    public final int twoWeek = 14;
+    private final int oneWeek = 7;
+    private final int twoWeek = 14;
 
     private PricePerPerson priceForOnePerson;
     private double days;
