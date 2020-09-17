@@ -3,7 +3,7 @@ package chapter_3;
 import java.util.*;
 
 enum  PricePerPerson {
-    LESS_THAN_ONE_WEEK(1000,25.60),MORE_THAN_ONE_WEEK(950,20.15),MORE_THAN_TWO_WEEK(800,17.36);
+    LESS_THAN_ONE_WEEK(1000,25.60), MORE_THAN_ONE_WEEK(950,20.15), MORE_THAN_TWO_WEEK(800,17.36);
 
     private int amount;
     private double taxPercent;
@@ -25,7 +25,7 @@ public class RHotelManagement {
 
     private final String F = "Filled";
     private final String N = "NotFilled";
-    private List<String> rooms = Arrays.asList(F,F,N,N,N,N,N,N,N,N,N);
+    private List<String> rooms = Arrays.asList(F, F, N, N, N, N, N, N, N, N, N);
 
     public final int oneWeek = 7;
     public final int twoWeek = 14;
@@ -34,7 +34,7 @@ public class RHotelManagement {
     private double days;
     private double guestCount;
     RHotelManagement(){}
-    RHotelManagement(PricePerPerson priceForOnePerson,double days ,double guestCount){
+    RHotelManagement(PricePerPerson priceForOnePerson, double days, double guestCount){
         this.priceForOnePerson = priceForOnePerson;
         this.days = days;
         this.guestCount = guestCount;
@@ -42,7 +42,7 @@ public class RHotelManagement {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner( System.in );
         RHotelManagement hotel = new RHotelManagement();
 
         System.out.println("Enter the no of rooms guest needed");
@@ -74,10 +74,10 @@ public class RHotelManagement {
             return lessThanOneWeekStay( days, guestCount);
         }
         else if (days > oneWeek && days < twoWeek){
-            return moreThanOneWeekStay(days, guestCount);
+            return moreThanOneWeekStay( days, guestCount);
         }
         else{
-            return moreThanTwoWeekStay(days, guestCount);
+            return moreThanTwoWeekStay( days, guestCount);
         }
 
     }
@@ -94,8 +94,8 @@ public class RHotelManagement {
     }
 
     private double execute(){
-        double totalAmt =(this.priceForOnePerson.getAmount() * this.guestCount) * this.days;
-        double GST = (this.priceForOnePerson.getTaxPercent()/100) * totalAmt;
+        double totalAmt =( this.priceForOnePerson.getAmount() * this.guestCount ) * this.days;
+        double GST = ( this.priceForOnePerson.getTaxPercent() / 100 ) * totalAmt;
         return totalAmt + GST;
     }
 
