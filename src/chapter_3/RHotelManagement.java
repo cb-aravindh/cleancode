@@ -47,7 +47,7 @@ public class RHotelManagement {
 
         System.out.println("Enter the no of rooms guest needed");
         int roomCount = sc.nextInt();
-        
+
         if( hotel.checkRoomsAvl(roomCount) ){
             System.out.println("Enter the no of days going to stay");
             int days = sc.nextInt();
@@ -71,25 +71,25 @@ public class RHotelManagement {
     private double getprice(int days, int guestCount) {
 
         if(days < oneWeek){
-            return lessThenOneWeekStay( days, guestCount);
+            return lessThanOneWeekStay( days, guestCount);
         }
         else if (days > oneWeek && days < twoWeek){
-            return moreThenOneWeekStay(days, guestCount);
+            return moreThanOneWeekStay(days, guestCount);
         }
         else{
-            return moreThenTwoWeekStay(days, guestCount);
+            return moreThanTwoWeekStay(days, guestCount);
         }
 
     }
-    private double lessThenOneWeekStay(int days, int guestCount){
+    private double lessThanOneWeekStay(int days, int guestCount){
         return new RHotelManagement(PricePerPerson.LESS_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
-    private double moreThenOneWeekStay (int days, int guestCount){
+    private double moreThanOneWeekStay (int days, int guestCount){
         return new RHotelManagement(PricePerPerson.MORE_THAN_ONE_WEEK, days, guestCount).execute();
     }
 
-    private double moreThenTwoWeekStay (int days, int guestCount){
+    private double moreThanTwoWeekStay (int days, int guestCount){
         return new RHotelManagement(PricePerPerson.MORE_THAN_TWO_WEEK, days, guestCount).execute();
     }
 
