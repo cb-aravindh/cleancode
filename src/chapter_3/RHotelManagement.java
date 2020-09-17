@@ -29,11 +29,13 @@ public class RHotelManagement {
 
     private final int oneWeek = 7;
     private final int twoWeek = 14;
-
+    private int roomCount;
     private PricePerPerson priceForOnePerson;
     private double days;
     private double guestCount;
-    RHotelManagement(){}
+    RHotelManagement(int roomCount){
+        this.roomCount = roomCount;
+    }
     RHotelManagement(PricePerPerson priceForOnePerson, double days, double guestCount){
         this.priceForOnePerson = priceForOnePerson;
         this.days = days;
@@ -43,12 +45,12 @@ public class RHotelManagement {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner( System.in );
-        RHotelManagement hotel = new RHotelManagement();
-
         System.out.println("Enter the no of rooms guest needed");
         int roomCount = sc.nextInt();
 
-        if( hotel.checkRoomsAvl(roomCount) ){
+        RHotelManagement hotel = new RHotelManagement(roomCount);
+
+        if( hotel.checkRoomsAvl() ){
             System.out.println("Enter the no of days going to stay");
             int days = sc.nextInt();
 
@@ -63,9 +65,9 @@ public class RHotelManagement {
         }
     }
 
-    private boolean checkRoomsAvl(int roomCount) {
+    private boolean checkRoomsAvl() {
         int roomUnOccupied = Collections.frequency(rooms,N);
-        return roomUnOccupied < roomCount ? false : true;
+        return roomUnOccupied < this.roomCount ? false : true;
     }
 
     private double getprice(int days, int guestCount) {
